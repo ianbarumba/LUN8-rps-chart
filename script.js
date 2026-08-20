@@ -667,6 +667,13 @@ saveBtn.addEventListener("click", async () => {
        항상 PC 버전과 동일한 1400px 레이아웃으로 저장되도록 한다. */
     const prevTransform = area.style.transform;
     area.style.transform = "none";
+   
+    // 캡처할 때 코멘트 글자 잘림 방지 (줄바꿈 허용)
+    const lrTexts = area.querySelectorAll(".lr-text");
+    lrTexts.forEach(el => {
+        el.style.whiteSpace = "pre-wrap";
+        el.style.wordBreak = "break-all";
+    });
 
     try {
         const canvas = await html2canvas(area, {
@@ -713,6 +720,13 @@ saveBtn.addEventListener("click", async () => {
         alert("이미지 저장 중 문제가 발생했습니다.");
     } finally {
         area.classList.remove("capturing");
+               // 캡처 후 원래 스타일로 복구
+        const lrTexts = area.querySelectorAll(".lr-text");
+        lrTexts.forEach(el => {
+            el.style.whiteSpace = "";
+            el.style.wordBreak = "";
+        });
+
         area.style.transform = prevTransform;
         buttonWrap.style.display = "flex";
         tabWrap.style.display = "flex";
