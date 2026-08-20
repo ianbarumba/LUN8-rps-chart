@@ -700,11 +700,11 @@ saveBtn.addEventListener("click", async () => {
         previewImage.src = currentBlobUrl;
         saveModal.classList.remove("hidden");
 
-        const fileLabel = currentTab === "rps" ? "옆페스_취향표" : "공수_취향표";
+        const fileLabel = currentTab === "rps" ? "룬페스_취향표" : "공수_취향표";
 
         const link = document.createElement("a");
         link.href = currentBlobUrl;
-        link.download = `BOYNEXTDOOR_${fileLabel}.png`;
+        link.download = `LUN8_${fileLabel}.png`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
