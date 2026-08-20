@@ -678,6 +678,48 @@ saveBtn.addEventListener("click", async () => {
 
 
     try {
+       // 다운로드 시 textarea의 줄바꿈이 제대로 캡처되도록 임시 변환
+const textareas = area.querySelectorAll("textarea");
+const textareaReplacements = [];
+
+textareas.forEach((textarea) => {
+    const div = document.createElement("div");
+    const style = window.getComputedStyle(textarea);
+
+    // textarea의 기존 스타일 복사
+    div.style.cssText = textarea.style.cssText;
+
+    div.style.width = style.width;
+    div.style.height = style.height;
+    div.style.padding = style.padding;
+    div.style.margin = style.margin;
+    div.style.border = style.border;
+    div.style.font = style.font;
+    div.style.fontSize = style.fontSize;
+    div.style.fontFamily = style.fontFamily;
+    div.style.fontWeight = style.fontWeight;
+    div.style.lineHeight = style.lineHeight;
+    div.style.textAlign = style.textAlign;
+    div.style.color = style.color;
+    div.style.backgroundColor = style.backgroundColor;
+    div.style.boxSizing = style.boxSizing;
+
+    // 핵심: 입력된 줄바꿈을 그대로 유지
+    div.style.whiteSpace = "pre-wrap";
+    div.style.wordBreak = "break-word";
+    div.style.overflowWrap = "break-word";
+    div.style.overflow = "visible";
+
+    div.textContent = textarea.value;
+
+    textarea.parentNode.insertBefore(div, textarea);
+    textarea.style.display = "none";
+
+    textareaReplacements.push({
+        textarea,
+        div
+    });
+});
         const canvas = await html2canvas(area, {
             backgroundColor: "#ffffff",
             scale: 4,
@@ -686,6 +728,11 @@ saveBtn.addEventListener("click", async () => {
             windowWidth: DESKTOP_CAPTURE_WIDTH,
             windowHeight: Math.max(area.scrollHeight, 1600)
         });
+       // 캡처가 끝났으므로 원래 textarea 복구
+textareaReplacements.forEach(({ textarea, div }) => {
+    div.remove();
+    textarea.style.display = "";
+});
 
         /*
          * data: URL 대신 Blob URL을 사용한다.
