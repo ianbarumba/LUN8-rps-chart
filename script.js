@@ -62,7 +62,7 @@ const options = [
 /* 사용자가 직접 고른 커스텀 색상 (name -> hex).
    여기에 값이 있으면 기본 color 대신 이 색을 쓴다.
    options 배열의 기본값 자체는 절대 덮어쓰지 않는다. */
-const CUSTOM_COLOR_KEY = "boynextdoor-custom-colors";
+const CUSTOM_COLOR_KEY = "LUN8-custom-colors";
 let customColors = JSON.parse(localStorage.getItem(CUSTOM_COLOR_KEY)) || {};
 
 function getOptionColor(option) {
@@ -79,8 +79,8 @@ function resetCustomColors() {
     localStorage.removeItem(CUSTOM_COLOR_KEY);
 }
 
-const STORAGE_KEY = "boynextdoor-yeop-rps";
-const LR_STORAGE_KEY = "boynextdoor-lr-rps";
+const STORAGE_KEY = "LUN8-yeop-rps";
+const LR_STORAGE_KEY = "LUN8-lr-rps";
 const LR_CELL_COUNT = 12;
 
 const table = document.getElementById("chartTable");
