@@ -362,6 +362,10 @@ td.diagonal {
     font-family: inherit;
     color: #222;
     outline: none;
+   .input-cell { /* 사용 중인 입력 칸 클래스명 */
+    white-space: pre-wrap;       /* 줄바꿈(엔터) 및 자동 줄바꿈 허용 */
+    word-break: break-all;       /* 단어가 길어도 상자 끝에서 강제 줄바꿈 */
+    overflow: visible;          /* 상자 밖으로 나가는 텍스트 보이기 */
 }
 
 .lr-text:focus {
