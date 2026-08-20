@@ -673,7 +673,9 @@ saveBtn.addEventListener("click", async () => {
     lrTexts.forEach(el => {
         el.style.whiteSpace = "pre-wrap";
         el.style.wordBreak = "break-all";
+        el.style.height = "auto"; // <--- 이 줄을 추가하세요!
     });
+
 
     try {
         const canvas = await html2canvas(area, {
